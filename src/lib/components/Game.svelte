@@ -1,21 +1,42 @@
 <script lang="ts">
-	import { levels, type Level } from '$lib/levels';
+	import { type Level } from '$lib/levels';
 	import { shuffle } from '$lib/utils';
 	import Found from './Found.svelte';
 	import Grid from './Grid.svelte';
 	import Info from './Info.svelte';
 
-	const level = levels[0];
+	interface Props {
+		onPlay(): void;
+		onPause(): void;
+		onWin(): void;
+		onLose(): void;
+	}
 
-	let size = $state<number>(level.size);
-	let grid = $state<string[]>(createGrid(level));
+	let { onPlay, onPause, onWin, onLose }: Props = $props();
+	let size = $state<number>(0);
+	let grid = $state<string[]>([]);
 	let foundPairs = $state<string[]>([]);
 	let currentMatches = $derived<number>(foundPairs.length);
-	let totalMatches = $derived<number>(level.size ** 2 / 2);
+	let totalMatches = $derived<number>(size ** 2 / 2);
 	let totalMoves = $state<number>(0);
-	let remaining = $state<number>(level.duration);
-	let duration = $state<number>(level.duration);
+	let remaining = $state<number>(0);
+	let duration = $state<number>(0);
 	let playing = $state<boolean>(false);
+
+	export function start(level: Level) {
+		size = level.size;
+		remaining = duration = level.duration;
+		grid = createGrid(level);
+
+		resume();
+	}
+
+	export function resume() {
+		playing = true;
+		countdown();
+
+		onPlay();
+	}
 
 	function createGrid({ emojis, size }: Level) {
 		const copy = emojis.slice();
@@ -42,6 +63,7 @@
 
 			if (remaining <= 0) {
 				playing = false;
+				onLose();
 			}
 		}
 
@@ -50,12 +72,28 @@
 
 	function onFoundPair(emoji: string) {
 		foundPairs.push(emoji);
+
+		if (foundPairs.length === totalMatches) {
+			playing = false;
+			setTimeout(() => {
+				onWin();
+			}, 1500);
+		}
 	}
 
 	function onMove() {
 		totalMoves++;
 	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (playing && event.key === 'Escape') {
+			playing = false;
+			onPause();
+		}
+	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <main class="flex h-full flex-col items-center justify-center" style="--size: {size}">
 	<section

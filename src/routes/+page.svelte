@@ -1,5 +1,70 @@
 <script lang="ts">
 	import Game from '$lib/components/Game.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import { levels } from '$lib/levels';
+
+	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('waiting');
+	let gameEl: ReturnType<typeof Game>;
+
+	function onPlay() {
+		gameState = 'playing';
+	}
+
+	function onPause() {
+		gameState = 'paused';
+	}
+
+	function onWin() {
+		gameState = 'won';
+	}
+
+	function onLose() {
+		gameState = 'lost';
+	}
 </script>
 
-<Game />
+<Game bind:this={gameEl} {onPlay} {onPause} {onWin} {onLose} />
+
+{#if gameState !== 'playing'}
+	<Modal>
+		<header class="mb-8">
+			<h1 class="text-9xl">e<span class="text-emerald-500">match</span>i</h1>
+			<p class="text-3xl">the Svelte matching game</p>
+		</header>
+
+		<div class="mb-2">
+			{#if gameState === 'won' || gameState === 'lost'}
+				<p>you {gameState}! play again?</p>
+			{:else if gameState === 'paused'}
+				<p>game paused</p>
+			{:else}
+				<p>choose a level:</p>
+			{/if}
+		</div>
+
+		<div class="flex justify-center gap-1">
+			{#if gameState === 'paused'}
+				<button onclick={() => gameEl.resume()} class="rounded-lg bg-emerald-500 p-4 text-zinc-50">
+					resume
+				</button>
+				<button
+					onclick={() => (gameState = 'waiting')}
+					class="rounded-lg bg-emerald-500 p-4 text-zinc-50"
+				>
+					quit
+				</button>
+			{:else}
+				{#each levels as level}
+					<button
+						onclick={() => {
+							gameEl.start(level);
+						}}
+						class="rounded-lg bg-emerald-500 p-4 text-zinc-50"
+					>
+						{level.label}
+					</button>
+				{/each}
+			{/if}
+		</div>
+	</Modal>
+{/if}
