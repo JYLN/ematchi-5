@@ -22,6 +22,7 @@
 	let remaining = $state<number>(0);
 	let duration = $state<number>(0);
 	let playing = $state<boolean>(false);
+	let showInfo = $state<boolean>(false);
 
 	export function start(level: Level) {
 		size = level.size;
@@ -33,6 +34,7 @@
 
 	export function resume() {
 		playing = true;
+		showInfo = true;
 		countdown();
 
 		onPlay();
@@ -63,6 +65,7 @@
 
 			if (remaining <= 0) {
 				playing = false;
+				showInfo = false;
 				onLose();
 			}
 		}
@@ -76,6 +79,7 @@
 		if (foundPairs.length === totalMatches) {
 			playing = false;
 			setTimeout(() => {
+				showInfo = false;
 				onWin();
 			}, 1500);
 		}
@@ -99,7 +103,9 @@
 	<section
 		class="grid h-24 w-[30rem] grid-cols-2 grid-rows-[75%_1fr] gap-2 font-poppins 2xl:w-[40rem]"
 	>
-		<Info {currentMatches} {totalMatches} {totalMoves} {remaining} {duration} />
+		{#if showInfo}
+			<Info {currentMatches} {totalMatches} {totalMoves} {remaining} {duration} />
+		{/if}
 	</section>
 
 	<section
@@ -108,7 +114,6 @@
 		<Grid {grid} {foundPairs} {onFoundPair} {onMove} />
 	</section>
 
-	<!-- TODO: Add found pairs display -->
 	<section
 		class="flex min-h-20 w-[30rem] flex-wrap items-center justify-center gap-1 py-2 transition-height duration-200 ease-in-out 2xl:w-[40rem]"
 	>
@@ -116,13 +121,15 @@
 	</section>
 </main>
 
-<footer class="absolute bottom-0 w-full pb-2 text-center">
-	<span class="text-xs text-zinc-700 dark:text-zinc-50">
-		Press
-		<kbd
-			class="inline-flex items-center justify-center rounded-md border border-zinc-500 bg-zinc-50 px-1 py-0.5 font-mono text-sm text-zinc-800 dark:bg-zinc-600 dark:text-zinc-50"
-			>Esc</kbd
-		>
-		to pause
-	</span>
-</footer>
+{#if playing}
+	<footer class="absolute bottom-0 w-full pb-2 text-center">
+		<span class="text-xs text-zinc-700 dark:text-zinc-50">
+			Press
+			<kbd
+				class="inline-flex items-center justify-center rounded-md border border-zinc-500 bg-zinc-50 px-1 py-0.5 font-mono text-sm text-zinc-800 dark:bg-zinc-600 dark:text-zinc-50"
+				>Esc</kbd
+			>
+			to pause
+		</span>
+	</footer>
+{/if}

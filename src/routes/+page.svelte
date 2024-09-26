@@ -4,7 +4,7 @@
 	import { levels } from '$lib/levels';
 	import { confetti } from '@neoconfetti/svelte';
 
-	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('won');
+	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('waiting');
 	let gameEl: ReturnType<typeof Game>;
 
 	function onPlay() {
