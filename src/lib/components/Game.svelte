@@ -28,6 +28,8 @@
 		size = level.size;
 		remaining = duration = level.duration;
 		grid = createGrid(level);
+		foundPairs = [];
+		totalMoves = 0;
 
 		resume();
 	}
