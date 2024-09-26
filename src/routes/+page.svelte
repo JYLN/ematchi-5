@@ -3,6 +3,8 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import { levels } from '$lib/levels';
 	import { confetti } from '@neoconfetti/svelte';
+	import { Moon, Sun } from 'lucide-svelte';
+	import { mode, toggleMode } from 'mode-watcher';
 
 	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('waiting');
 	let gameEl: ReturnType<typeof Game>;
@@ -23,6 +25,18 @@
 		gameState = 'lost';
 	}
 </script>
+
+<div class="absolute right-0 top-0 z-50 p-4">
+	<button
+		onclick={toggleMode}
+		title="Toggle {$mode === 'dark' ? 'light' : 'dark'} mode"
+		role="switch"
+		aria-checked={$mode === 'dark'}
+	>
+		<Sun class="hidden stroke-zinc-50 dark:block" />
+		<Moon class="stroke-zinc-700 dark:hidden" />
+	</button>
+</div>
 
 <Game bind:this={gameEl} {onPlay} {onPause} {onWin} {onLose} />
 
