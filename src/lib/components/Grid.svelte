@@ -3,11 +3,12 @@
 
 	interface Props {
 		grid: string[];
-		onFoundPair(emoji: string): void;
 		foundPairs: string[];
+		onFoundPair(emoji: string): void;
+		onMove(): void;
 	}
 
-	let { grid, onFoundPair, foundPairs }: Props = $props();
+	let { grid, foundPairs, onFoundPair, onMove }: Props = $props();
 	let firstIndex = $state<number>(-1);
 	let secondIndex = $state<number>(-1);
 	let timeoutId = $state<ReturnType<typeof setTimeout>>();
@@ -17,6 +18,7 @@
 	<GridCard
 		{emoji}
 		onclick={() => {
+			onMove();
 			if (firstIndex > -1 && secondIndex > -1) {
 				clearTimeout(timeoutId);
 				firstIndex = i;
