@@ -5,7 +5,15 @@
 @import 'tailwindcss/utilities';
 
 @layer base {
-	html,
+	:root {
+		--confetti-1: theme('colors.emerald.200');
+		--confetti-2: theme('colors.emerald.400');
+		--confetti-3: theme('colors.emerald.600');
+		--confetti-4: theme('colors.zinc.200');
+		--confetti-5: theme('colors.zinc.400');
+	}
+
+	:root,
 	body {
 		@apply h-full bg-zinc-50 dark:bg-zinc-700;
 	}

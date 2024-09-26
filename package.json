@@ -35,6 +35,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/poppins": "^5.1.0"
+		"@fontsource/poppins": "^5.1.0",
+		"@neoconfetti/svelte": "^2.2.1"
 	}
 }

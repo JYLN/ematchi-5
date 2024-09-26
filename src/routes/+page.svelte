@@ -2,8 +2,9 @@
 	import Game from '$lib/components/Game.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import { levels } from '$lib/levels';
+	import { confetti } from '@neoconfetti/svelte';
 
-	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('waiting');
+	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('won');
 	let gameEl: ReturnType<typeof Game>;
 
 	function onPlay() {
@@ -31,6 +32,24 @@
 			<h1 class="text-9xl">e<span class="text-emerald-500">match</span>i</h1>
 			<p class="text-3xl">the Svelte matching game</p>
 		</header>
+
+		{#if gameState === 'won'}
+			<div
+				class="absolute -top-56 left-1/2"
+				use:confetti={{
+					stageHeight: innerHeight,
+					stageWidth: innerWidth,
+					particleShape: 'rectangles',
+					colors: [
+						'var(--confetti-1)',
+						'var(--confetti-2)',
+						'var(--confetti-3)',
+						'var(--confetti-4)',
+						'var(--confetti-5)'
+					]
+				}}
+			></div>
+		{/if}
 
 		<div class="mb-2">
 			{#if gameState === 'won' || gameState === 'lost'}
