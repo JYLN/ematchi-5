@@ -115,3 +115,14 @@
 		<Found {foundPairs} />
 	</section>
 </main>
+
+<footer class="absolute bottom-0 w-full pb-2 text-center">
+	<span class="text-xs text-zinc-700 dark:text-zinc-50">
+		Press
+		<kbd
+			class="inline-flex items-center justify-center rounded-md border border-zinc-500 bg-zinc-50 px-1 py-0.5 font-mono text-sm text-zinc-800 dark:bg-zinc-600 dark:text-zinc-50"
+			>Esc</kbd
+		>
+		to pause
+	</span>
+</footer>
