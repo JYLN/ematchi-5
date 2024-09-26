@@ -13,13 +13,13 @@
 </script>
 
 <!-- Pairs Matched -->
-<article class="rounded-lg bg-zinc-200 p-4 text-zinc-500">
+<article class="rounded-lg bg-zinc-200 p-4 text-zinc-500 dark:bg-zinc-500 dark:text-zinc-200">
 	<ProgressBar
 		value={currentMatches}
 		max={totalMatches}
 		class="mb-1"
-		bgColor="bg-zinc-300"
-		fgColor="bg-zinc-600"
+		bgColor="bg-zinc-300 dark:bg-zinc-600"
+		fgColor="bg-zinc-600 dark:bg-zinc-300"
 		tweened
 	/>
 	<div class="flex items-end justify-between">
@@ -31,7 +31,7 @@
 </article>
 
 <!-- Total Moves -->
-<article class="rounded-lg bg-zinc-200 p-4 text-zinc-500">
+<article class="rounded-lg bg-zinc-200 p-4 text-zinc-500 dark:bg-zinc-500 dark:text-zinc-200">
 	<div class="mb-1 h-2"></div>
 	<div class="flex items-end justify-between">
 		<h2>Total Moves</h2>
@@ -41,5 +41,10 @@
 
 <!-- Countdown -->
 <div class="col-span-2">
-	<ProgressBar value={remaining} max={duration} bgColor="bg-zinc-200" fgColor="bg-zinc-500" />
+	<ProgressBar
+		value={remaining}
+		max={duration}
+		bgColor="bg-zinc-200 dark:bg-zinc-500"
+		fgColor="bg-zinc-500 dark:bg-zinc-300"
+	/>
 </div>
