@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { send } from '$lib/transitions';
 	import Twemoji from './Twemoji.svelte';
 
 	interface Props {
@@ -6,9 +7,10 @@
 		onclick: () => void;
 		selected: boolean;
 		found: boolean;
+		group: 'a' | 'b';
 	}
 
-	let { emoji, onclick, selected, found }: Props = $props();
+	let { emoji, onclick, selected, found, group }: Props = $props();
 </script>
 
 <button
@@ -28,7 +30,9 @@
 			class:border-zinc-200={found}
 		>
 			{#if !found}
-				<Twemoji class="w-1/3" {emoji} />
+				<span class="w-1/3" out:send={{ key: `${emoji}:${group}` }}>
+					<Twemoji {emoji} />
+				</span>
 			{/if}
 		</div>
 	</div>

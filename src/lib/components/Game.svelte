@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { levels, type Level } from '$lib/levels';
 	import { shuffle } from '$lib/utils';
+	import Found from './Found.svelte';
 	import Grid from './Grid.svelte';
 	import Info from './Info.svelte';
 
@@ -70,4 +71,9 @@
 	</section>
 
 	<!-- TODO: Add found pairs display -->
+	<section
+		class="flex min-h-20 w-[30rem] flex-wrap items-center justify-center gap-1 py-2 transition-height duration-200 ease-in-out 2xl:w-[40rem]"
+	>
+		<Found {foundPairs} />
+	</section>
 </main>
