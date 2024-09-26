@@ -1,0 +1,12 @@
+@import '@fontsource/poppins';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+	html,
+	body {
+		@apply h-full bg-zinc-50;
+	}
+}
