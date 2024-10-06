@@ -7,7 +7,7 @@
 	import { mode, toggleMode } from 'mode-watcher';
 
 	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('waiting');
-	let gameEl: ReturnType<typeof Game>;
+	let gameEl = $state<ReturnType<typeof Game>>();
 
 	function onPlay() {
 		gameState = 'playing';
@@ -77,7 +77,7 @@
 
 		<div class="flex justify-center gap-1">
 			{#if gameState === 'paused'}
-				<button onclick={() => gameEl.resume()} class="rounded-lg bg-emerald-500 p-4 text-zinc-50">
+				<button onclick={() => gameEl!.resume()} class="rounded-lg bg-emerald-500 p-4 text-zinc-50">
 					resume
 				</button>
 				<button
@@ -90,7 +90,7 @@
 				{#each levels as level}
 					<button
 						onclick={() => {
-							gameEl.start(level);
+							gameEl!.start(level);
 						}}
 						class="rounded-lg bg-emerald-500 p-4 text-zinc-50"
 					>
