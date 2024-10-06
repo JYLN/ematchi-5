@@ -69,6 +69,7 @@
 		aria-checked={isDarkMode}
 		aria-label="Toggle {isDarkMode ? 'light' : 'dark'} mode"
 		transition:fade={{ delay: 200, duration: 300 }}
+		class="hover:rounded-md hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-emerald-500 focus:rounded-md focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-emerald-500"
 	>
 		<Sun class="hidden stroke-zinc-50 dark:block" />
 		<Moon class="stroke-zinc-700 dark:hidden" />
