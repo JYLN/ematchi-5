@@ -5,8 +5,8 @@
 	import { levels } from '$lib/levels';
 	import { confetti } from '@neoconfetti/svelte';
 
-	let gameState = $state<'waiting' | 'playing' | 'paused' | 'lost' | 'won'>('waiting');
-	let gameEl = $state<ReturnType<typeof Game>>();
+	let gameState: 'waiting' | 'playing' | 'paused' | 'lost' | 'won' = $state('waiting');
+	let gameInstance: ReturnType<typeof Game>;
 
 	function onPlay() {
 		gameState = 'playing';
@@ -29,7 +29,7 @@
 	<ThemeButton />
 </div>
 
-<Game bind:this={gameEl} {onPlay} {onPause} {onWin} {onLose} />
+<Game bind:this={gameInstance} {onPlay} {onPause} {onWin} {onLose} />
 
 {#if gameState !== 'playing'}
 	<Modal>
@@ -68,7 +68,10 @@
 
 		<div class="flex justify-center gap-1">
 			{#if gameState === 'paused'}
-				<button onclick={() => gameEl!.resume()} class="rounded-lg bg-emerald-500 p-4 text-zinc-50">
+				<button
+					onclick={() => gameInstance.resume()}
+					class="rounded-lg bg-emerald-500 p-4 text-zinc-50"
+				>
 					resume
 				</button>
 				<button
@@ -81,7 +84,7 @@
 				{#each levels as level}
 					<button
 						onclick={() => {
-							gameEl!.start(level);
+							gameInstance.start(level);
 						}}
 						class="rounded-lg bg-emerald-500 p-4 text-zinc-50"
 					>

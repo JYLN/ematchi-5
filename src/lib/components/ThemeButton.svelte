@@ -2,8 +2,8 @@
 	import { Moon, Sun } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
 
-	let isDarkMode = $state<boolean>();
-	let isHidden = $state<boolean>(true);
+	let isDarkMode = $state() as boolean;
+	let isHidden: boolean = $state(true);
 
 	function toggleMode() {
 		setMode(!isDarkMode);

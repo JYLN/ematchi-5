@@ -7,7 +7,7 @@
 	}
 
 	let { emoji, class: className }: Props = $props();
-	let emojiSrc = $state<string>('');
+	let emojiSrc: string = $state('');
 
 	function getEmojiUnicode(emoji: string) {
 		return [...emoji].map((char) => char.codePointAt(0)!.toString(16)).join('-');

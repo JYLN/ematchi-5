@@ -9,9 +9,9 @@
 	}
 
 	let { grid, foundPairs, onFoundPair, onMove }: Props = $props();
-	let firstIndex = $state<number>(-1);
-	let secondIndex = $state<number>(-1);
-	let timeoutId = $state<ReturnType<typeof setTimeout>>();
+	let firstIndex: number = $state(-1);
+	let secondIndex: number = $state(-1);
+	let timeoutId = $state() as ReturnType<typeof setTimeout>;
 </script>
 
 {#each grid as emoji, i}

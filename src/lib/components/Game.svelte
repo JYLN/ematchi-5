@@ -13,16 +13,16 @@
 	}
 
 	let { onPlay, onPause, onWin, onLose }: Props = $props();
-	let size = $state<number>(0);
-	let grid = $state<string[]>([]);
-	let foundPairs = $state<string[]>([]);
-	let currentMatches = $derived<number>(foundPairs.length);
-	let totalMatches = $derived<number>(size ** 2 / 2);
-	let totalMoves = $state<number>(0);
-	let remaining = $state<number>(0);
-	let duration = $state<number>(0);
-	let playing = $state<boolean>(false);
-	let showInfo = $state<boolean>(false);
+	let size: number = $state(0);
+	let grid: string[] = $state([]);
+	let foundPairs: string[] = $state([]);
+	let currentMatches: number = $derived(foundPairs.length);
+	let totalMatches: number = $derived(size ** 2 / 2);
+	let totalMoves: number = $state(0);
+	let remaining: number = $state(0);
+	let duration: number = $state(0);
+	let playing: boolean = $state(false);
+	let showInfo: boolean = $state(false);
 
 	export function start(level: Level) {
 		size = level.size;
