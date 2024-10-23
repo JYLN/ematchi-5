@@ -19,4 +19,4 @@ My rebuild of the ematchi game by Rich Harris. This rebuild consists of Svelte 5
 ## Todo
 
 - [ ] Deploy for use as a portfolio project
-- [ ] Update all deps and potential code/syntax when Svelte 5 is out of RC and on stable release
+- [x] Update all deps and potential code/syntax when Svelte 5 is out of RC and on stable release (Complete: 10/23/2024 :tada: YAY SVELTE 5)
