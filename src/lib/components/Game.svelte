@@ -103,7 +103,7 @@
 
 <main class="flex h-full flex-col items-center justify-center" style="--size: {size}">
 	<section
-		class="grid h-24 w-[30rem] grid-cols-2 grid-rows-[75%_1fr] gap-2 font-poppins 2xl:w-[40rem]"
+		class="font-poppins grid h-24 w-[30rem] grid-cols-2 grid-rows-[75%_1fr] gap-2 2xl:w-[40rem]"
 	>
 		{#if showInfo}
 			<Info {currentMatches} {totalMatches} {totalMoves} {remaining} {duration} />
@@ -117,7 +117,7 @@
 	</section>
 
 	<section
-		class="flex min-h-20 w-[30rem] flex-wrap items-center justify-center gap-1 py-2 transition-height duration-200 ease-in-out 2xl:w-[40rem]"
+		class="transition-height flex min-h-20 w-[30rem] flex-wrap items-center justify-center gap-1 py-2 duration-200 ease-in-out 2xl:w-[40rem]"
 	>
 		<Found {foundPairs} />
 	</section>
