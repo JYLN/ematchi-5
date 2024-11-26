@@ -1,14 +1,22 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss';
+
+@variant dark (&:is(.dark *));
+
+@theme {
+	/* Font Theme */
+	--font-poppins: Poppins, sans-serif;
+
+	/* Transition Theme */
+	--transition-property-height: height;
+}
 
 @layer base {
 	:root {
-		--confetti-1: theme('colors.emerald.200');
-		--confetti-2: theme('colors.emerald.400');
-		--confetti-3: theme('colors.emerald.600');
-		--confetti-4: theme('colors.zinc.200');
-		--confetti-5: theme('colors.zinc.400');
+		--confetti-1: var(--color-emerald-200);
+		--confetti-2: var(--color-emerald-400);
+		--confetti-3: var(--color-emerald-600);
+		--confetti-4: var(--color-zinc-200);
+		--confetti-5: var(--color-zinc-400);
 	}
 
 	:root,

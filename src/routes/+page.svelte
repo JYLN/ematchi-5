@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="absolute right-0 top-0 z-50 p-4">
+<div class="absolute top-0 right-0 z-50 p-4">
 	<ThemeButton />
 </div>
 
